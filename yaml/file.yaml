@@ -1,0 +1,11 @@
+items:
+- processor
+- memory
+- motherboard
+- video_card
+items_quantity: 3
+items_price:
+  processor: 100€-1000€
+  memory: 50€-200€
+  motherboard: 50€-300€
+  video_card: 400€-3000€
