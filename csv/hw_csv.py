@@ -1,0 +1,44 @@
+import re
+import csv
+import chardet
+
+def get_data():
+    os_prod_list = []
+    os_name_list = []
+    os_code_list = []
+    os_type_list = []
+    data = [['Изготовитель системы', 'Название ОС', 'Код продукта', 'Тип системы'],]
+
+    for i in range(1, 4):
+        with open(f'info_{i}.txt', 'rb') as file_obj:
+            data_bytes = file_obj.read()
+            result = chardet.detect(data_bytes)
+            file_data = data_bytes.decode(result['encoding'])
+
+        os_prod_reg = re.compile(r'Изготовитель системы:\s*\S*')
+        os_prod_list.append(os_prod_reg.findall(file_data)[0].split()[2])
+        os_name_reg = re.compile(r'Windows\s\S*')
+        os_name_list.append(os_name_reg.findall(file_data)[0])
+        os_code_reg = re.compile(r'Код продукта:\s*\S*')
+        os_code_list.append(os_code_reg.findall(file_data)[0].split()[2])
+        os_type_reg = re.compile(r'Тип системы:\s*\S*')
+        os_type_list.append(os_type_reg.findall(file_data)[0].split()[2])
+
+    data_lines = [os_prod_list, os_name_list, os_code_list, os_type_list]
+
+    for i in range(len(data_lines[0])):
+        line = [row[i] for row in data_lines]
+        data.append(line)
+
+    return data
+
+
+def write_to_csv(file_name):
+    data = get_data()
+    with open(file_name, 'w', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        for row in data:
+            writer.writerow(row)
+
+
+write_to_csv('data_report.csv')
