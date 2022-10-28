@@ -21,7 +21,8 @@ def get_response(message):
     if 'response' in message:
         if message['response'] == 200:
             return '200 : Connected'
-        return f'400 : {message["error"]}'
+        elif message['response'] == 400:
+            return f'400 : {message["error"]}'
     raise ValueError
 
 
