@@ -2,7 +2,10 @@ import json
 import unittest
 import socket
 import core.var as var
+import sys
+import os
 from core.utils import get_message, send_message
+sys.path.append(os.path.join(os.getcwd(), '..'))
 
 
 class TestUtils(unittest.TestCase):

@@ -1,5 +1,8 @@
 import unittest
+import sys
+import os
 from server import prep_response
+sys.path.append(os.path.join(os.getcwd(), '..'))
 
 
 class TestServer(unittest.TestCase):

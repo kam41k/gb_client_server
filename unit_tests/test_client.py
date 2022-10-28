@@ -1,5 +1,8 @@
 import unittest
+import sys
+import os
 from client import create_pres, get_response
+sys.path.append(os.path.join(os.getcwd(), '..'))
 
 
 class TestClient(unittest.TestCase):
